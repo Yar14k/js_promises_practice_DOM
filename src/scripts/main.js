@@ -3,7 +3,7 @@
 const doc = document;
 
 const promise1 = new Promise((resolve, reject) => {
-  doc.querySelector('.logo').addEventListener('click', (e) => {
+  doc.addEventListener('click', (e) => {
     if (e.button === 0) {
       clearTimeout(timeoutId);
       resolve(e);
@@ -16,26 +16,26 @@ const promise1 = new Promise((resolve, reject) => {
 });
 
 const promise2 = new Promise((resolve) => {
-  doc.querySelector('.logo').addEventListener('click', (c) => {
+  doc.addEventListener('click', (c) => {
     resolve(c);
   });
 
-  doc.querySelector('.logo').addEventListener('contextmenu', (c) => {
+  doc.addEventListener('contextmenu', (c) => {
     c.preventDefault();
     resolve(c);
   });
 });
 
 const promise3 = new Promise((resolve, reject) => {
-  doc.querySelector('.logo').addEventListener('click', () => {
-    doc.querySelector('.logo').addEventListener('contextmenu', (b) => {
+  doc.addEventListener('click', () => {
+    doc.addEventListener('contextmenu', (b) => {
       b.preventDefault();
       resolve(b);
     });
   });
 
-  doc.querySelector('.logo').addEventListener('contextmenu', () => {
-    doc.querySelector('.logo').addEventListener('click', (d) => {
+  doc.addEventListener('contextmenu', () => {
+    doc.addEventListener('click', (d) => {
       d.preventDefault();
       resolve(d);
     });
