@@ -1,41 +1,41 @@
 'use strict';
 
-const logo = document.querySelector('.logo');
+const doc = document;
 
 const promise1 = new Promise((resolve, reject) => {
-  logo.addEventListener('click', (e) => {
+  doc.querySelector('.logo').addEventListener('click', (e) => {
     if (e.button === 0) {
-      clearTimeout();
+      clearTimeout(timeoutId);
       resolve(e);
     }
   });
 
-  setTimeout(() => {
+  const timeoutId = setTimeout(() => {
     reject(new Error('First promise was rejected'));
   }, 3000);
 });
 
 const promise2 = new Promise((resolve) => {
-  logo.addEventListener('click', (c) => {
+  doc.querySelector('.logo').addEventListener('click', (c) => {
     resolve(c);
   });
 
-  logo.addEventListener('contextmenu', (c) => {
+  doc.querySelector('.logo').addEventListener('contextmenu', (c) => {
     c.preventDefault();
     resolve(c);
   });
 });
 
 const promise3 = new Promise((resolve, reject) => {
-  logo.addEventListener('click', () => {
-    logo.addEventListener('contextmenu', (b) => {
+  doc.querySelector('.logo').addEventListener('click', () => {
+    doc.querySelector('.logo').addEventListener('contextmenu', (b) => {
       b.preventDefault();
       resolve(b);
     });
   });
 
-  logo.addEventListener('contextmenu', () => {
-    logo.addEventListener('click', (d) => {
+  doc.querySelector('.logo').addEventListener('contextmenu', () => {
+    doc.querySelector('.logo').addEventListener('click', (d) => {
       d.preventDefault();
       resolve(d);
     });
@@ -45,7 +45,7 @@ const promise3 = new Promise((resolve, reject) => {
 promise1
   .then(() => notification('First promise was resolved'))
 
-  .catch(() => notification('First promise was rejected'), 'error');
+  .catch(() => notification('First promise was rejected', 'error'));
 
 promise2.then(() => notification('Second promise was resolved'));
 
